@@ -41,7 +41,7 @@ const Filters = () => {
           <div className='border dark:border-white mx-2'>
            <h1 className='text-xl text-black dark:text-white px-3'>Filters</h1>
                 <p className='text-sm flex justify-center underline mb-2'> &nbsp; &nbsp; Launch Year &nbsp;&nbsp;</p>
-                <div className='grid grid-cols-2'>
+                <div className='grid grid-cols-2 mx-6'>
                 {year.map(({url, text}, index)=>(
                     <NavLink to={url} onClick={()=>setYearFilter(text)} key={index} >
                         {text}
@@ -49,7 +49,7 @@ const Filters = () => {
                 ))}
                     </div>
             <p className='text-sm flex justify-center underline mt-2 mb-2'>&nbsp;Successful Launch&nbsp;</p>
-            <div className='grid grid-cols-2'>
+            <div className='grid grid-cols-2 mx-6'>
                 {launch.map(({url, text}, index)=>(
                     <NavLink to={url} onClick={()=>setLaunchFilter(text)} key={index}>
                         {String(text)}
@@ -57,7 +57,7 @@ const Filters = () => {
                 ))}
             </div>
             <p className='text-sm flex justify-center underline mt-2 mb-2'>&nbsp;Successful Landing&nbsp;</p>
-            <div className='grid grid-cols-2'>
+            <div className='grid grid-cols-2 mx-6'>
                 {land.map(({url, text}, index)=>(
                     <NavLink to={url} key={index} onClick={()=>setLandFilter(text)}>
                         {String(text)}

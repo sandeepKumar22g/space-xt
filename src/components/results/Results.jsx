@@ -35,7 +35,7 @@ const Results = () => {
                         <img src={links.mission_patch} alt="" className='h-36 mx-auto' />
                         </div>
                         <h1 className='text-center text-xl font-bold text-blue-600'>{mission_name} #{flight_number}</h1>
-                        <h2 className='mx-3'>Mission-ID : <span className='text-blue-500'> {mission_id} </span></h2>
+                        <h2 className='mx-3'>Mission-ID : <span className='text-blue-500'> {(mission_id.length>0)?mission_id : "null"} </span></h2>
                         <h2 className='mx-3'>Launch Year : <span className='text-blue-500'> {launch_year} </span></h2>
                         <h2 className='mx-3'>Success Launch: <span className='text-blue-500'> {String(launch_success)} </span></h2>
                         <h2 className='mx-3'>successful Landing: <span className='text-blue-500'> {String(rocket.first_stage.cores[0].land_success)} </span></h2>

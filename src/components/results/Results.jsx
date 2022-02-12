@@ -18,8 +18,8 @@ const Results = () => {
             }else{
                 getResults()
             }
-    }, [location.pathname, launchFilter, yearFilter, landFilter]);
-    
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    },[location.pathname, launchFilter, yearFilter, landFilter]);
     if(isLoading) return <Loading />
     console.log(location.pathname);
 

@@ -13,8 +13,6 @@ export const ResultProviderContext = ({children}) => {
     const [yearFilter, setYearFilter] = useState(2014)
 
 
-
-
     const getResults = async()=>{
         const baseURL = "https://api.spaceXdata.com/v3/launches?limit=100"
         setLoading(true)
@@ -62,7 +60,7 @@ export const ResultProviderContext = ({children}) => {
 
   return(
       <>
-        <ResultContext.Provider value={{getResults, results, isLoading, setLaunchFilter, launchResults, setLandFilter, launchLandingResults, yearResults, setYearFilter}}>
+        <ResultContext.Provider value={{getResults, results, isLoading, setLaunchFilter, launchResults, setLandFilter, launchLandingResults, yearResults, setYearFilter, launchFilter, yearFilter, landFilter}}>
             {children}
         </ResultContext.Provider>
       </>

@@ -4,7 +4,7 @@ export const Footer = () => {
 
   
     return (
-        <div className='text-center p-10 mt-10 border-t dark:border-gray-700 border-gray-200 fixed z-10 bottom-0'>
+        <div className='text-center  p-10 mt-10 border-t dark:border-gray-700 border-gray-200'>
             <h1>Copyright &copy; Sandeep Kumar</h1>
         </div>
     )

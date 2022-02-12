@@ -4,7 +4,7 @@ import { useResultContext } from '../../context/ResultProviderContext';
 import { Loading } from './loading/Loading';
 
 const Results = () => {
-    const {results, isLoading, getResults, launchResults, launchLandingResults,  yearResults} = useResultContext()
+    const {results, isLoading, getResults, launchResults, launchLandingResults,  yearResults,  launchFilter, yearFilter, landFilter} = useResultContext()
     const location = useLocation()
 
 
@@ -18,84 +18,63 @@ const Results = () => {
             }else{
                 getResults()
             }
-    }, []);
+    }, [location.pathname, launchFilter, yearFilter, landFilter]);
     
     if(isLoading) return <Loading />
     console.log(location.pathname);
 
-  switch (location.pathname) {
-      case '/':
+
+
+
+    const Output = () =>{
         return(
-            <div className='flex flex-wrap justify-between space-y-6 absolute'>
+            <div className='flex flex-wrap justify-around space-y-6 '>
                 {results.map(({mission_name, flight_number, launch_year, launch_success, mission_id, links, rocket}, index)=>(
-                    <div className='h-72 w-60 mx-4 my-3 border-2' key={index}>
+                    <div className='h-80 w-60 mx-4 my-3 border-black border-2 dark:border-white' key={index}>
                         <div className='h-36'>
                         <img src={links.mission_patch} alt="" className='h-36 mx-auto' />
                         </div>
-                        <h1>{mission_name} #{flight_number}</h1>
-                        <h2>Mission-ID : {mission_id}</h2>
-                        <h2>Launch Year : {launch_year}</h2>
-                        <h2>Success Launch: {String(launch_success)}</h2>
-                        <h2>successful Landing: {String(rocket.first_stage.cores[0].land_success)} </h2>
+                        <h1 className='text-center text-xl font-bold text-blue-600'>{mission_name} #{flight_number}</h1>
+                        <h2 className='mx-3'>Mission-ID : <span className='text-blue-500'> {mission_id} </span></h2>
+                        <h2 className='mx-3'>Launch Year : <span className='text-blue-500'> {launch_year} </span></h2>
+                        <h2 className='mx-3'>Success Launch: <span className='text-blue-500'> {String(launch_success)} </span></h2>
+                        <h2 className='mx-3'>successful Landing: <span className='text-blue-500'> {String(rocket.first_stage.cores[0].land_success)} </span></h2>
                     </div>
                 ))}
             </div>
         )    
+    }
+
+    const Filtering =()=>{
+        return <Output />
+    }
+
+    const Error = ()=>{
+        return(
+            <div className='flex justify-center content-center'>
+                <h1 className='text-3xl text-red-500'>Oops! there is some error please try after some times</h1>
+            </div>
+        )
+    }
+
+
+
+
+  switch (location.pathname) {
+      case '/':
+        return <Output />    
 
 
     case "/launchtrue" :
-        return (
-            <div className='flex flex-wrap justify-between space-y-6 absolute'>
-                {results.map(({mission_name, flight_number, launch_year, launch_success, mission_id, links, rocket}, index)=>(
-                    <div className='h-72 w-60 mx-4 my-3 border-2' key={index}>
-                        <div className='h-36'>
-                        <img src={links.mission_patch} alt="" className='h-36 mx-auto' />
-                        </div>
-                        <h1>{mission_name} #{flight_number}</h1>
-                        <h2>Mission-ID : {mission_id}</h2>
-                        <h2>Launch Year : {launch_year}</h2>
-                        <h2>Success Launch: {String(launch_success)}</h2>
-                        <h2>successful Landing: {String(rocket.first_stage.cores[0].land_success)} </h2>
-                    </div>
-                ))}
-            </div>
-        )
+        return <Output />
     
-        case "/landingtrue":
-                return(
-                    <div className='flex flex-wrap justify-between space-y-6 absolute'>
-                    {results.map(({mission_name, flight_number, launch_year, launch_success, mission_id, links, rocket}, index)=>(
-                        <div className='h-72 w-60 mx-4 my-3 border-2' key={index}>
-                            <div className='h-36'>
-                            <img src={links.mission_patch} alt="" className='h-36 mx-auto' />
-                            </div>
-                            <h1>{mission_name} #{flight_number}</h1>
-                            <h2>Mission-ID : {mission_id}</h2>
-                            <h2>Launch Year : {launch_year}</h2>
-                            <h2>Success Launch: {String(launch_success)}</h2>
-                            <h2>successful Landing: {String(rocket.first_stage.cores[0].land_success)} </h2>
-                        </div>
-                    ))}
-                </div>
-                )
-        case "/year" :
-            return(
-                <div className='flex flex-wrap justify-between space-y-6 absolute'>
-                {results.map(({mission_name, flight_number, launch_year, launch_success, mission_id, links, rocket}, index)=>(
-                    <div className='h-72 w-60 mx-4 my-3 border-2' key={index}>
-                        <div className='h-36'>
-                        <img src={links.mission_patch} alt="" className='h-36 mx-auto' />
-                        </div>
-                        <h1>{mission_name} #{flight_number}</h1>
-                        <h2>Mission-ID : {mission_id}</h2>
-                        <h2>Launch Year : {launch_year}</h2>
-                        <h2>Success Launch: {String(launch_success)}</h2>
-                        <h2>successful Landing: {String(rocket.first_stage.cores[0].land_success)} </h2>
-                    </div>
-                ))}
-            </div>
-            )
-      default:
+    case "/landingtrue":
+            return <Output />
+
+    case "/year" :
+            return ((yearFilter>2013)? <Filtering /> : <Error />)
+           
+    default:
           return "error"
   }
 };

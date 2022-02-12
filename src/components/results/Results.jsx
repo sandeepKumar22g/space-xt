@@ -45,9 +45,6 @@ const Results = () => {
         )    
     }
 
-    const Filtering =()=>{
-        return <Output />
-    }
 
     const Error = ()=>{
         return(
@@ -64,7 +61,6 @@ const Results = () => {
       case '/':
         return <Output />    
 
-
     case "/launchtrue" :
         return <Output />
     
@@ -72,7 +68,7 @@ const Results = () => {
             return <Output />
 
     case "/year" :
-            return ((yearFilter>2013)? <Filtering /> : <Error />)
+            return ((yearFilter>2013)? <Output /> : <Error />)
            
     default:
           return "error"
